@@ -1,0 +1,119 @@
+---
+title: "R for Data Science"
+subtitle: "Chapters 5 & 6: Regression and Algorithms, Analytics and Predictions"
+author: "Pavitra Chakravarty"
+institute: "@genomixgmailcom"
+date: " `r Sys.Date()` "
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["xaringan-themer.css","custom.css"]
+   
+---
+
+
+```{r xaringan-themer, include = FALSE}
+library(xaringanthemer)
+library(tidyverse)
+library(hexbin)
+library(modelr)
+style_mono_light(
+  base_color = "#3092FF",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Droid Mono"),
+)
+```
+
+
+# Outline of Chapter 6
+
+--
+
+- Using past data to produce an algorithm. Using technology 
+- Classification/Supervised Learning or Prediction - same underlying nature. Take set of     observations and map them to relevant conclusion
+- AI
+ - Narrow AI - speech recognition, google Translate, computer vision s/w
+ - IBM Watson - learned algorithms
+ - General AI - algorithms to help in decision making
+- Big Data 
+ - n > millions/billions of records
+ - p (features) > millions pf features (small n and large p)
+ - now we have large n and large p 
+- Clustering or unsupervised learning
+ - finding homogeneous clusters (people with similar likes/dislikes)
+- Data reduction 
+ - reduce the number of measures called feature engineering 
+ - use features that have max contribution to info about what is being analyzed
+- Kaggle provides training/testing datasets to produce algorithms
+ - Titanic  700/2200 survived on lifeboats
+ - produce algorithms based on classification
+ 
+---
+
+# Outline of Chapter 7
+
+--
+
+- Classification tree:
+ - set of yes/no questions.
+
+- Assessing performance of algorithms:
+ - error or confusion matrix (Fig 6.1)
+  - percentage of true survivors or sensitivity of the algorithm
+  - percentage of true non-survivors correctly predicted is known as specificity
+ - Crude measure of the performance 
+ - Does not give us the confidence with which the predction was made
+ - Only get the classification of survived/not survived
+
+---
+
+- ROC curve (receiver operating characteristics):
+ - Assign a probability to the ends of the classification tree 
+ - The advantage is the ability to dynamically assign a threshold to predict survivorship. 
+ - For example, the table 6.1 uses 50% as threshold to arrive at 0.78(spec) and 0.84(sens) 
+ - For 70% probability as survivorship threshold, 0.98(spec) and 0.50(sen) 
+  - we only identify half the survivors but make few false predictions
+ - Random ROC which assigns numbers randomly would have diagonal ROC curve 
+ - Best ROC curves, move towards the top left corner
+ - To compare ROC you will measure AUC underneath them, right down to the horizontal
+- ROCs are a good way to split groups but not to how good the probabilities are
+
+---
+
+- Probabilitic prediction
+ - Use calibration plots that to see accuracy
+ - Combine ROC and Calibration plots 
+ - Then we see how to split the groups and accuracy of predicted probabilities 
+ - Overfitting data has a higher briar score which means its predictive ability has started to decline
+- Making an algorithm too complex, we start to fit the noise, rather than the signal
+ - Overfitting leads to less bias but more variance in the estimations
+ - This is why protection against over-fitting is known as bias-variance tradeoff
+ 
+---
+
+- Techniques to reduce over-fitting
+ - Regularization
+  - Complex models are encouraged but the effects of individual variables are pulled in towards 0
+  - Use cross-validation while constructing algorithm
+  - Remove 10% of the training data and keep that for the cross-validation 
+  - Remove 10% in turn and do it 10 times - 10-fold cross validation
+  - Build a highly over-fitted tree and prune back using a complexity parameter
+  - for each of the 10 cross-validation samples a tree is developed for range of complexity parameters
+  - for each parameter, the average predicted performance over the 10 cross-validation sets is calculated
+  - Average performance improves up to a certain point and then degrades
+ - Best complexity parameter gives the best cross-validatory performance
+
+---
+
+- Regression Models
+ - Logistic regression
+ - Non-linear lasso model: simultaneously estimates coefficients and selects predictor variables 
+
+- More complex techniques
+ - Trees attempt grouping while Regression is about coefficients/weights 
+ - Random forests 
+  - Trees each producing classifications with the final one being selected by a process called bagging
+ - Support Vector Machines (SVM): trying to find different linear combinations 
+ - Neural networks: kind of logistic regression piled on top of each other
+ - Deep learning: neural networks with many levels 

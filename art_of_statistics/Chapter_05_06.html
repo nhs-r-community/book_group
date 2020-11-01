@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>R for Data Science</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Pavitra Chakravarty" />
+    <meta name="date" content="2020-11-01" />
+    <script src="libs/header-attrs-2.3.2/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# R for Data Science
+## Chapters 5 &amp; 6: Regression and Algorithms, Analytics and Predictions
+### Pavitra Chakravarty
+### <span class="citation">@genomixgmailcom</span>
+### 2020-11-01
+
+---
+
+
+
+
+
+
+# Outline of Chapter 6
+
+--
+
+- Using past data to produce an algorithm. Using technology 
+- Classification/Supervised Learning or Prediction - same underlying nature. Take set of     observations and map them to relevant conclusion
+- AI
+ - Narrow AI - speech recognition, google Translate, computer vision s/w
+ - IBM Watson - learned algorithms
+ - General AI - algorithms to help in decision making
+- Big Data 
+ - n &gt; millions/billions of records
+ - p (features) &gt; millions pf features (small n and large p)
+ - now we have large n and large p 
+- Clustering or unsupervised learning
+ - finding homogeneous clusters (people with similar likes/dislikes)
+- Data reduction 
+ - reduce the number of measures called feature engineering 
+ - use features that have max contribution to info about what is being analyzed
+- Kaggle provides training/testing datasets to produce algorithms
+ - Titanic  700/2200 survived on lifeboats
+ - produce algorithms based on classification
+ 
+---
+
+# Outline of Chapter 7
+
+--
+
+- Classification tree:
+ - set of yes/no questions.
+
+- Assessing performance of algorithms:
+ - error or confusion matrix (Fig 6.1)
+  - percentage of true survivors or sensitivity of the algorithm
+  - percentage of true non-survivors correctly predicted is known as specificity
+ - Crude measure of the performance 
+ - Does not give us the confidence with which the predction was made
+ - Only get the classification of survived/not survived
+
+---
+
+- ROC curve (receiver operating characteristics):
+ - Assign a probability to the ends of the classification tree 
+ - The advantage is the ability to dynamically assign a threshold to predict survivorship. 
+ - For example, the table 6.1 uses 50% as threshold to arrive at 0.78(spec) and 0.84(sens) 
+ - For 70% probability as survivorship threshold, 0.98(spec) and 0.50(sen) 
+  - we only identify half the survivors but make few false predictions
+ - Random ROC which assigns numbers randomly would have diagonal ROC curve 
+ - Best ROC curves, move towards the top left corner
+ - To compare ROC you will measure AUC underneath them, right down to the horizontal
+- ROCs are a good way to split groups but not to how good the probabilities are
+
+---
+
+- Probabilitic prediction
+ - Use calibration plots that to see accuracy
+ - Combine ROC and Calibration plots 
+ - Then we see how to split the groups and accuracy of predicted probabilities 
+ - Overfitting data has a higher briar score which means its predictive ability has started to decline
+- Making an algorithm too complex, we start to fit the noise, rather than the signal
+ - Overfitting leads to less bias but more variance in the estimations
+ - This is why protection against over-fitting is known as bias-variance tradeoff
+ 
+---
+
+- Techniques to reduce over-fitting
+ - Regularization
+  - Complex models are encouraged but the effects of individual variables are pulled in towards 0
+  - Use cross-validation while constructing algorithm
+  - Remove 10% of the training data and keep that for the cross-validation 
+  - Remove 10% in turn and do it 10 times - 10-fold cross validation
+  - Build a highly over-fitted tree and prune back using a complexity parameter
+  - for each of the 10 cross-validation samples a tree is developed for range of complexity parameters
+  - for each parameter, the average predicted performance over the 10 cross-validation sets is calculated
+  - Average performance improves up to a certain point and then degrades
+ - Best complexity parameter gives the best cross-validatory performance
+
+---
+
+- Regression Models
+ - Logistic regression
+ - Non-linear lasso model: simultaneously estimates coefficients and selects predictor variables 
+
+- More complex techniques
+ - Trees attempt grouping while Regression is about coefficients/weights 
+ - Random forests 
+  - Trees each producing classifications with the final one being selected by a process called bagging
+ - Support Vector Machines (SVM): trying to find different linear combinations 
+ - Neural networks: kind of logistic regression piled on top of each other
+ - Deep learning: neural networks with many levels 
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
