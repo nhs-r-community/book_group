@@ -1,0 +1,145 @@
+---
+title: "Book club: The Art of Statistics Chapters 9 & 10"
+author: Michael Naylor
+date: 12 November 2020
+output: slidy_presentation
+---
+
+# Chapter 9: Putting Probability and Statistics Together
+
+## Start with a population
+
+- If there were 20% left handers in the population what would I see?
+
+- Resample - like bootstrapping, but theoretically
+
+- Bigger n less variation in the answer
+
+---
+
+## Changing n
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(ggplot2)
+
+bowel.data<-read.csv("09-2-bowel-cancer-data-x.csv",header=T)
+##summary(bowel.data)
+ attach(bowel.data)
+mean.prop=sum(n)/sum(d)
+props=n/d
+max.props=max(props)
+  
+# try funnelR package
+library(funnelR)
+# Numerator must be called n, denomnator d
+funnel_limits   <- fundata(input=bowel.data,benchmark=mean.prop, alpha=0.95, alpha2=0.998, method='approximate', step=100)
+funnel_plot     <- funplot(input=bowel.data, fundata=funnel_limits)
+funnel_plot = funnel_plot + coord_cartesian(ylim = c(0,max.props) )
+  
+#funnel_plot = funnel_plot + geom_hline(yintercept=mean.prop, colour="darkred", linetype=6, size=1)
+funnel_plot = funnel_plot + scale_x_continuous(name="Population (100,000's)", breaks=100000*(0:14), labels=0:14, limits=c(0,max(d)))
+funnel_plot = funnel_plot + scale_y_continuous(name="Annual bowel cancer mortality rate per 100,000", breaks=5*(0:8)/100000, labels=5*(0:8), limits=c(0,max.props))
+
+glasgow <- subset(bowel.data, District == "Glasgow City")  # identify Glasgow City in data frame
+#funnel_plot = funnel_plot + geom_text(data=glasgow, label="Glasgow City", vjust=1)
+funnel_plot = funnel_plot + annotate("text", x=glasgow$d,y=glasgow$n/glasgow$d,label="Glasgow City",hjust=0, vjust=0.5)
+funnel_plot 
+```
+```
+
+---
+
+## Central Limit Theorem
+
+- The distribution of the sample mean gets closer to a normal distribution as the sample size increases, regardless of the underlying distribution of the population (except when it doesn't)
+
+- From Chapter 3, Normal distribution is driven by a large number of small influences
+
+- The influences don't have to be normal - it's adding them all up that leads to a normal distribution
+
+
+## Types of uncertainty
+
+- Aleatory uncertainty - before it happens
+    - flip a coin
+    - throwing a hoop    
+    - lottery ticket
+
+- Epistemic uncertainty
+    - the coin has landed, but you can't see it
+    - scratch card
+    - parameters (Greek letters)
+    - fixed but unknown
+  
+- We use aleatory uncertainty (Probability) as a basis for epistemic uncertainty (Statistics)
+
+---
+
+## Getting a confidence interval
+
+1. For a parameter, work out a 95% prediction interval
+2. Observe the statistic
+3. The range of parameters where the statistic is within the 95% prediction intervals is our 95% confidence interval
+4. If we repeat this 95% of such intervals should contain the true value
+
+It's NOT got a 95% chance of being in that range though - like a hoop that has landed already
+
+---
+
+## Confidence intervals
+
+- We can solve equations to get confidence intervals, as long as the population distribution is normal
+- Thanks to the Central Limit Theorem, we can assume this for the distributions of the parameter
+- Margin of Errors in Surveys - roughly 100 / sqrt(number of participants)
+- But, they don't account for systemic sampling errors
+
+---
+
+# Chapter 10: Answering Questions and Claiming Discoveries
+
+## Tests of Hypothesis
+
+- Similar logic to Chapter 9, but now apply it to theories
+- If my theory were true, what's the probablity of seeing this
+- John Arbuthnot:
+    - theory: girls and boys are equally likely to be born (Null hypothesis)
+    - what he saw: records showed 82 consecutive years of more boys than girls
+    - how likely is that: not very!
+- Formal tests to avoid our pesky biases
+
+## Some tests
+
+- Permutation test 
+    - an empirical approach
+    - "reallocate" the property at random
+- If we know, or can assume, a distribution then we can calculate P values
+    - hypergeometric
+    - poisson
+    - normal
+
+## Assessing the results
+
+- P values - how surprising is the data given the null hypothesis
+- They're directly comparable to confidence intervals
+- What p-values aren't
+    - not the chance that the null is true
+    - can't say that the null is true at all!
+
+
+
+## Neyman-Pearson Theory
+
+- Added another layer - what alternative are you considering?
+- Also formalised how you could get it wrong
+    - Type 1 error : reject the null when we shouldn't (false positive)
+    - Type 2 error : don't reject the null when we should (false negative)
+- If you decide in advance how much you're willing to accept each kind of error, then you can work out what sample size you need
+
+
+## The problem with too many tests
+
+- Lots of research
+- Unpublished research
+- Sequential testing is many tests as well
+
+---
