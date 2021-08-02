@@ -1,0 +1,278 @@
+---
+title: "NHS-R Community Book club"
+subtitle: "Invisible Women, chapters 3 & 4"
+author: "Zoë Turner"
+date: "July 2021"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    lib_dir: libs
+    seal: false
+    self_contained: true
+    nature:
+      highlightStyle: googlecode
+      highlightLines: true
+      highlightLanguage: ["r"]
+      countIncrementalSlides: false
+      ratio: "16:9"
+---
+
+```{r setup, include = FALSE}
+library(knitr)
+library(tidyverse)
+
+### Packages not on CRAN ###
+library(xaringanthemer)
+
+# install.packages("remotes")
+# remotes::install_github("mitchelloharawild/icon")
+library(icon) # icons need to be loaded to view so run following code if not already done
+# icon::download_fontawesome()
+
+# install.packages("devtools")
+#devtools::install_github("gadenbuie/xaringanExtra")
+library(xaringanExtra)
+xaringanExtra::use_share_again() # need to get the slide button on html view
+
+# set default options
+opts_chunk$set(echo = FALSE,
+               fig.width = 7.252,
+               fig.height = 4,
+               dpi = 300,
+               dev.args = list(type = "cairo"),
+               eval = TRUE,
+               warning = FALSE,
+               message = FALSE,
+               error = FALSE)
+
+```
+
+```{r echo=FALSE}
+style_mono_accent(
+  base_color = "#1c5253",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono")
+)
+
+```
+
+class: inverse, middle, center
+
+# `r rmarkdown::metadata$title`
+----
+## **`r rmarkdown::metadata$subtitle`**
+### `r rmarkdown::metadata$author` | `r rmarkdown::metadata$date`
+</br>
+
+---
+
+# Note following meeting
+
+I wrote these notes for the group but didn't show them as we discussed the book generally and a few of the stories that are featured. 
+
+These slides are built using {xaringan}, {xaringanExtra} and {xaringanthemer} - there appears to be an issue with the `--` for some slides where this is printing and text isn't sliding into view as intended.
+
+---
+
+# Chapter 3 - money 
+
+Opens with a story about the women of Iceland going on strike on 24 October 1975
+
+--
+
+* 90% (20k+) of women went on strike
+
+--
+
+* A year later Iceland passed the first Gender Equality Act
+
+--
+
+* By 2017 Iceland topped the World Economic Forum's Global Gender Gap Index for the 8th year running
+
+--
+
+## That's a huge impact
+
+---
+
+# But things are changing...
+
+A common retort that men are doing more of their share of the household work burden
+
+--
+
+* Individually, yes
+
+* At a population level, no
+
+-- 
+
+Women take on a greater share of housework, caring responsibilities and also, often, work
+
+--
+
+Leisure pursuits are imbalanced with women's being shorter, more fragmented and often 
+combine tasks
+
+--
+
+When ill or recovering from surgery women return to the housework sooner
+
+--
+
+To the extent that single female recover better from heart attacks than married women
+
+---
+
+# Unpaid work
+
+The hidden data for women isn't always 'direct'
+
+--
+
+Indirectly women are not being counted in unpaid work they do when "science" says you shouldn't "work" more than 40 (paid of course) hours a week 
+
+--
+
+To accommodate unpaid work responsibilities women work part-time (75% are women)
+
+--
+
+Part-time work is often lower graded so women get paid less
+
+--
+
+That gets hidden in pay gap statistics when part-time and full-time is combined
+
+---
+
+# Money
+
+Lower pension pots and savings due to working patterns
+
+--
+
+Leads to greater poverty in older years
+
+--
+
+Remember women live longer then men (on average)
+
+--
+
+And as for maternity it pays poorly to have children 
+
+* UK was 22nd out of 24 European countries on length of "decently paid maternity leave"
+
+-- 
+
+For some it doesn't pay at all, like MPs and councillors
+
+--
+
+Paternity schemes where time is shared often work better when rules where its not taken up by the other partner then it's lost
+
+-- 
+
+Huge effects on women working in universities as the system of tenure doesn't allow for gaps to have children
+
+-- 
+
+Some processes put in place that are meant to be fair by including the father, further disadvantaged the mother - they were able to use the time to publish whereas the mothers didn't
+
+---
+
+# Childcare
+
+It's not just about babies! 
+
+--
+
+Taxes disadvantage women who need childcare as it's a personal expense
+
+-- 
+
+But booking a hotel for a night is a valid expense
+
+---
+
+# Chapter 4 - meritocracy 
+
+Blind auditions for the orchestra equalised numbers of man to women
+
+--
+
+Desire for meritocracy to exist, to work very strong
+
+--
+
+Criticism in performance reviews is more personal for women - tone & character
+
+--
+
+Believing in meritocracy can introduce bias (justification of decisions?)
+
+-- 
+
+Differences in publishing and citations (men self cite 70% more than women)
+
+--
+
+Male default thinking so when using initials, assumed male
+
+---
+
+# Time
+
+Differences in time requested to do papers (requesting extensions, re-grading and so on)
+
+-- 
+
+Admin burden falls to women - extra teaching hours, paperwork
+
+-- 
+
+Emotional support expected from staff but then also penalised
+
+--
+
+Least effective males are still ranked higher than more effective females
+
+
+---
+
+# Teaching
+
+We still use teaching evaluations and they are useless (resonates)
+
+--
+
+Personal comments appear more frequently in female lecturers feedback
+
+--
+
+Girls are learning that brilliance and genius is female at school
+
+--
+
+Females were the original computers and coders. Great book recommendation is [Coders](https://www.panmacmillan.com/authors/clive-thompson/coders/9781529018981) by Clive Thompson
+
+---
+
+# Thoughts
+
+Highlights poor logical thinking - so much of what is highlighted in this book is that assumptions are made so often on what we see and record, forgetting the missing
+
+--
+
+Lots of facts
+
+--
+
+Stories are more memorable
+
+--
+
+After a week, what do you remember?
