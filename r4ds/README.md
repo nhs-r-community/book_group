@@ -1,3 +1,5 @@
 [R4DS](https://r4ds.had.co.nz/), Hadley Wickham & Garrett Grolemund perhaps doesn't need much introduction but this is the go-to book for many on learning about R and the tidyverse packages for plotting (ggplot2) and manipulating data (dplyr).
 
 We will start reading the R4DS book on Friday 12th November 2021 (2nd week of the NHS-R Conference), 2-3pm and we'll cover chapter 2 (intro - very short) and chapter 3.1-3.5 with the exercise of 3.5.1 on facets. We discuss and share the meeting links on the NHS-R Community Slack group nhsrcommunity.slack.com in the #book-club channel. To join the Slack group, please contact [NHS-R Community Admin](mailto:nhs.rcommunity@nhs.net)
+
+26th November 2021 - 2-3pm Chapters 3.5 to 3.10 to finish chapter 3 with a stretch target of covering Chapter 4
