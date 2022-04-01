@@ -82,3 +82,10 @@ df %>%
 
 df %>% 
   select(all_of(vars))
+
+
+# 5.4.1-4 -----------------------------------------------------------------
+
+# ignores case
+
+select(nycflights13::flights, contains("TIME"))
