@@ -43,3 +43,55 @@ df %>%
          sched_dep_time,
          dep_delay) %>% 
   View()
+
+
+# 5.5.2-4 -----------------------------------------------------------------
+
+# cheat's way :) 
+df %>% 
+  select(dep_time,
+         sched_dep_time,
+         dep_delay) %>% 
+  arrange(desc(dep_delay)) %>% 
+  head(10)
+
+# Using the - in the column acts like a max_rank that doesn't exist  
+df %>% 
+  select(dep_time,
+         sched_dep_time,
+         dep_delay) %>% 
+  mutate(most_delayed = min_rank(-dep_delay)) %>% 
+  arrange(most_delayed)
+
+df %>% 
+  select(dep_time,
+         sched_dep_time,
+         dep_delay) %>% 
+  mutate(most_delayed = min_rank(-dep_delay)) %>% 
+  filter(most_delayed <10)
+
+#with a tie
+df %>% 
+  select(dep_time,
+         sched_dep_time,
+         dep_delay) %>% 
+  mutate(most_delayed = rank(-dep_delay, ties.method = "last")) %>% 
+  filter(most_delayed <10)
+
+
+# 5.5.2-5 -----------------------------------------------------------------
+
+1:3 + 1:10
+
+# Let's never do this!
+df %>%  
+  mutate(dep_time = dep_time + 1:2) %>% 
+  select(dep_time)
+
+
+# 5.5.2-6 -----------------------------------------------------------------
+
+?trig
+
+# Don't do this!!!!
+# c <- 21
