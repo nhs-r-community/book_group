@@ -95,3 +95,33 @@ df %>%
 
 # Don't do this!!!!
 # c <- 21
+
+
+# 5.6 ---------------------------------------------------------------------
+
+not_cancelled <- df %>% 
+  filter(!is.na(dep_delay), !is.na(arr_delay))
+
+delays <- not_cancelled %>% 
+  group_by(tailnum) %>% 
+  summarise(
+    delay = mean(arr_delay, na.rm = TRUE),
+    n = n()
+  )
+
+delays %>% 
+  filter(n > 200) %>%
+  ggplot(mapping = aes(x = n, y = delay)) + 
+  geom_point(alpha = 1/10)
+
+# this instead
+
+delays %>% 
+  select(-c(2:3))
+
+delays %>% 
+  select(-(2:3))
+
+
+delays %>% 
+  select(-c(delay: n))
