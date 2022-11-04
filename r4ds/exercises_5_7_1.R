@@ -1,3 +1,8 @@
+library(tidyverse)
+
+flights <- nycflights13::flights
+airlines <- nycflights13::airlines
+
 # 5.7 ---------------------------------------------------------------------
 
 popular_dests <- flights %>% 
